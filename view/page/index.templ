@@ -1,0 +1,41 @@
+package page
+
+import "alc/view/layout"
+
+templ Index() {
+	@layout.BasePage("All Last Computing") {
+		<main>
+			<div>
+				<my-carousel class="h-[calc(100dvh-8.25rem)]" autoplay="3500" controls indicator>
+					<div>
+						<img class="relative object-cover w-full h-full" src="/static/images/image1.jpg" alt=""/>
+						<div class="absolute inset-x-[15%] bottom-9 py-5 text-center text-white">
+							<h1>Picture 1</h1>
+						</div>
+					</div>
+					<div>
+						<img class="object-cover w-full h-full" src="/static/images/image2.jpg" alt=""/>
+						<div class="absolute inset-x-[15%] bottom-9 py-5 text-center text-white">
+							<h1>Picture 2</h1>
+						</div>
+					</div>
+					<div>
+						<img class="object-cover w-full h-full" src="/static/images/image3.jpg" alt=""/>
+						<div class="absolute inset-x-[15%] bottom-9 py-5 text-center text-white">
+							<h1>Picture 3</h1>
+						</div>
+					</div>
+				</my-carousel>
+				<div id="about">
+					Nosotros
+				</div>
+				<div id="services">
+					Servicios
+				</div>
+				<div id="contact">
+					Contacto
+				</div>
+			</div>
+		</main>
+	}
+}
