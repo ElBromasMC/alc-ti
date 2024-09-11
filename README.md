@@ -45,5 +45,5 @@ $ make live
 ENV=production
 PORT=8080
 REL=1
-WEBSERVER_HOSTNAME=
+WEBSERVER_HOSTNAME=domain.tld
 ```
