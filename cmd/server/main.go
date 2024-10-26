@@ -34,11 +34,6 @@ func main() {
 	// Page routes
 	e.GET("/", ph.HandleIndexShow)
 
-	// Temp routes
-	e.GET("/sync", func(c echo.Context) error {
-		return c.Redirect(http.StatusFound, "https://github.com/Catfriend1/syncthing-android/releases/download/v1.27.9.0/com.github.catfriend1.syncthingandroid_github_v1.27.9.0_f5e720f5.apk")
-	})
-
 	// Error handler
 	e.HTTPErrorHandler = util.HTTPErrorHandler
 
