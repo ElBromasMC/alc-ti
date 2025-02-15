@@ -21,7 +21,7 @@ WORKDIR /home/devrunner
 RUN go install github.com/air-verse/air@latest \
     && go install github.com/a-h/templ/cmd/templ@latest
 
-COPY --chown=devrunner:devrunner scripts/docker-run.sh ./
+COPY --chown=devrunner:devrunner ./scripts/docker-run.sh ./
 
 # Use npm to install dependencies
 COPY --chown=devrunner:devrunner package.json package-lock.json ./
