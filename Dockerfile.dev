@@ -10,30 +10,30 @@ RUN apk add --no-cache \
     inotify-tools
 
 # Create and change to non-root user
-RUN groupadd --gid $USER_GID devrunner
-RUN useradd --uid $USER_UID --gid $USER_GID -m devrunner
-USER devrunner
+RUN addgroup -g $USER_GID devrunner \
+    && adduser -G devrunner -u $USER_UID -D devrunner
 
-WORKDIR /home/devrunner/src
+# Change to non-root user and enter home directory
+USER devrunner
+WORKDIR /home/devrunner
 
 # Install development tools
-RUN go install github.com/air-verse/air@latest
-RUN go install github.com/a-h/templ/cmd/templ@latest
+RUN go install github.com/air-verse/air@latest \
+    && go install github.com/a-h/templ/cmd/templ@latest
+
+COPY --chown=devrunner:devrunner scripts/docker-run.sh ./
 
 # Use npm to install dependencies
-COPY package.json package-lock.json ./
+COPY --chown=devrunner:devrunner package.json package-lock.json ./
 RUN npm install
 
 # Install go project dependencies
-COPY go.mod go.sum ./
+COPY --chown=devrunner:devrunner go.mod go.sum ./
 RUN go mod download
 
-RUN rm package.json \
-    package-lock.json \
-    go.mod \
-    go.sum
-
-# Define volume
+# Create and enter src folder
+RUN mkdir /home/devrunner/src
+WORKDIR /home/devrunner/src
 VOLUME /home/devrunner/src
 
 # Expose the web server
@@ -42,4 +42,4 @@ EXPOSE 8080
 # Expose the live reload web socket
 EXPOSE 8010
 
-ENTRYPOINT ["make", "live"]
+ENTRYPOINT ["/home/devrunner/docker-run.sh"]

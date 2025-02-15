@@ -1,6 +1,6 @@
 services:
   webserver:
-    image: "dev/runner"
+    image: "devrunner"
     build:
       context: .
       dockerfile: ./Dockerfile.dev
