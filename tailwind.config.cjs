@@ -12,11 +12,10 @@ export const theme = {
     },
     colors: {
       navy: '#1d2747',
-      azure: '#0096d8',
+      azure: '#39a0ed',
       chalky: '#f9f9f9',
-      livid: "#393938",
-      darkblue: "#0f151b",
-      logored: "#ff0001"
+      livid: '#4c6085',
+      darkblue: "#0f151b"
     },
   },
 };

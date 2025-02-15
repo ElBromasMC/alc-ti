@@ -1,0 +1,45 @@
+FROM golang:1.24-alpine AS builder
+
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+RUN apk add --no-cache \
+    make \
+    nodejs \
+    npm \
+    inotify-tools
+
+# Create and change to non-root user
+RUN groupadd --gid $USER_GID devrunner
+RUN useradd --uid $USER_UID --gid $USER_GID -m devrunner
+USER devrunner
+
+WORKDIR /home/devrunner/src
+
+# Install development tools
+RUN go install github.com/air-verse/air@latest
+RUN go install github.com/a-h/templ/cmd/templ@latest
+
+# Use npm to install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Install go project dependencies
+COPY go.mod go.sum ./
+RUN go mod download
+
+RUN rm package.json \
+    package-lock.json \
+    go.mod \
+    go.sum
+
+# Define volume
+VOLUME /home/devrunner/src
+
+# Expose the web server
+EXPOSE 8080
+
+# Expose the live reload web socket
+EXPOSE 8010
+
+ENTRYPOINT ["make", "live"]
