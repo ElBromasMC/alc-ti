@@ -1,49 +1,39 @@
 # go-webserver-template
-All Last Computing webpage
 
-## Local environment
+All Last Computing website (serves as a template)
+
+## Development environment
 
 ### Prerequisites
-* Go
-* Node and npm
-* PostgreSQL
-* [Air](https://github.com/cosmtrek/air#installation)
-* [Templ](https://templ.guide/quick-start/installation)
-* inotify-tools
 
-### Install build dependencies
-```shell
-$ npm install
-```
+* Docker
 
 ### .env file example
-```
-ENV=development
-PORT=8080
-REL=1
-```
 
-### Load env variables
 ```shell
-$ set -a
-$ source .env
-$ set +a
+USER_UID="1000" # It must match your current user UID
+ENV="development"
+PORT="8080"
+REL="1"
 ```
 
 ### Live reload
+
 ```shell
-$ make live
+$ bin/live.sh
 ```
 
-## Docker
+## Production environment
 
 ### Prerequisites
+
 * [Traefik](https://doc.traefik.io/traefik/getting-started/quick-start/)
 
 ### Docker compose .env file example
-```
+
+```shell
+WEBSERVER_HOSTNAME=domain.tld
 ENV=production
 PORT=8080
 REL=1
-WEBSERVER_HOSTNAME=domain.tld
 ```

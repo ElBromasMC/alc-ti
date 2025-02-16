@@ -7,7 +7,8 @@ RUN apk add --no-cache \
     make \
     nodejs \
     npm \
-    inotify-tools
+    inotify-tools \
+    bash
 
 # Create and change to non-root user
 RUN addgroup -g $USER_GID devrunner \
