@@ -14,4 +14,6 @@ else
     exit 1
 fi
 
+# Clean build artifacts and run the live reload!
+make clean
 exec make live
