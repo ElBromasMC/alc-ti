@@ -1,6 +1,6 @@
 services:
   devrunner:
-    image: "devrunner"
+    image: "devrunner-alc-ti"
     build:
       context: .
       dockerfile: ./Dockerfile.dev
